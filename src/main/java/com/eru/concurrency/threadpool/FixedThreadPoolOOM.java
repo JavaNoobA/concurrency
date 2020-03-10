@@ -1,5 +1,6 @@
 package com.eru.concurrency.threadpool;
 
+import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -9,8 +10,13 @@ import java.util.concurrent.Executors;
  */
 public class FixedThreadPoolOOM {
     public static void main(String[] args) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         ExecutorService service = Executors.newFixedThreadPool(5);
-
+        new Date();
         for (int i = 0; i < Integer.MAX_VALUE; i++) {
             service.execute(new SubThread());
         }
